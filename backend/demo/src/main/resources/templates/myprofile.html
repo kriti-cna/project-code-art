@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Profile</title>
+</head>
+<body>
+
+    <h1>Welcome, <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span>!</h1>
+
+    <div th:if="${successMessage}" style="color: green;">
+        <p th:text="${successMessage}"></p>
+    </div>
+    <div th:if="${errorMessage}" style="color: red;"></div>
+        <p th:text="${errorMessage}"></p>
+    </div>
+    
+
+
+    <form action="#" th:action="@{updateprofile/{id}(id=${user.id})}" th:object="${user}" method="post">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" th:field="*{firstName}" placeholder="First Name" />
+        
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" th:field="*{lastName}" placeholder="Last Name" />
+        
+        <button type="submit">Update Profile</button>
+    </form>
+
+    <form action="#" th:action="@{deleteprofile/{id}(id=${user.id})}" method="post">
+        <button type="submit" onclick="return confirm('Are you sure you want to delete your profile?')">Delete Profile</button>
+    </form>
+</body>
+</html>
